@@ -1,0 +1,17 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+    name: "redteam-59a3"
+    labels:
+        app: "redteam-59a3"
+    annotations:
+        kubernetes.io/ingress.class: addon-http-application-routing
+spec:
+    rules:
+        - host: red-team-redteam-59a3.4c7399bd4b734105b017.eastus.aksapp.io
+          http:
+            paths:
+            - path: /
+              backend:
+                serviceName: "redteam-59a3"
+                servicePort: 80
