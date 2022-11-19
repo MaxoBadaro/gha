@@ -1,19 +1,23 @@
-apiVersion : apps/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: "redteam-59a3"
+  name: test
+  namespace: test
 spec:
-  replicas: 2
   selector:
     matchLabels:
-      app: "redteam-59a3"
+      app: test
+  replicas: 2
   template:
     metadata:
       labels:
-        app: "redteam-59a3"
+        app: test
     spec:
       containers:
-        - name: "redteam-59a3"
-          image: "redteam.azurecr.io/redteam"
-          ports:
-          - containerPort: 80
+      - image: ${{ secrets.DOCKER_HUB_USERNAME }}/test:latest
+        name: test
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 3000
+          name: http
+          protocol: TCP
