@@ -1,0 +1,27 @@
+on: [workflow_dispatch]
+
+name: Kubernetes Manifests
+
+env:
+  NAMESPACE: test
+
+jobs:
+  apply-manifests:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - uses: Azure/aks-set-context@v1
+      with:
+        creds: '${{ secrets.AZURE_CREDENTIALS }}'
+        cluster-name: red-team-cluster
+        resource-group: RedTeam
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - uses: azure/k8s-deploy@v1
+      with:
+        namespace: test
+        manifests: |
+          manifests/deployment.yaml
