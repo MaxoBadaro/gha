@@ -1,14 +1,29 @@
 on: [workflow_dispatch]
 
-name: AzureLoginSample
+name: Kubernetes Manifests
+
+env:
+  NAMESPACE: test
 
 jobs:
-
-  build-and-deploy:
+  apply-manifests:
     runs-on: ubuntu-latest
     steps:
-    
-      - uses: azure/actions/login@v1
-        with:
-          creds: ${{ secrets.AZURE_CREDENTIALS }}
-
+    - name: Azure Login
+      uses: azure/login@v1.4.6
+      with:
+        client-id: 2f5b6309-db5c-438a-8a2d-9c142cc2482f
+        tenant-id: 7225c96d-8464-4716-a784-00aa2c59245d
+        subscription-id: b1f14ce2-41fb-4c12-8f8e-5763efbe21ad
+    - uses: Azure/aks-set-context@v1
+      with:
+        creds: '${{ secrets.AZURE_CREDENTIALS }}'
+        cluster-name: red-team-cluster
+        resource-group: RedTeam
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - uses: azure/k8s
+      with:
+        namespace: matrix-app-namespace
+        manifests: |
+          manifests/kubernetes.yaml
