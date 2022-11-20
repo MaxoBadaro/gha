@@ -22,7 +22,7 @@ jobs:
         resource-group: RedTeam
     - name: Checkout code
       uses: actions/checkout@v2
-    - uses: azure/k8s
+    - uses: azure/k8s-deploy@v1
       with:
         namespace: matrix-app-namespace
         manifests: |
