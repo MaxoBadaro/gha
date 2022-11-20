@@ -15,7 +15,7 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
     - uses: Azure/aks-set-context@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        creds: '${{ secrets.AZURE_CREDENTIALS }}'
         cluster-name: red-team-cluster
         resource-group: RedTeam
     - name: Checkout code
