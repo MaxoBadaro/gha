@@ -13,10 +13,10 @@ jobs:
     - name: Azure Login
       uses: azure/actions/login@v1
       with:
-        creds: ${{ env.CREDENTIALS }}
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
     - uses: Azure/aks-set-context@v1
       with:
-        creds: ${{ env.CREDENTIALS }}
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
         cluster-name: red-team-cluster
         resource-group: RedTeam
     - name: Checkout code
