@@ -4,6 +4,7 @@ name: Kubernetes Manifests
 
 env:
   NAMESPACE: test
+  CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
 
 jobs:
   apply-manifests:
@@ -12,10 +13,10 @@ jobs:
     - name: Azure Login
       uses: azure/actions/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        creds: ${{ env.CREDENTIALS }}
     - uses: Azure/aks-set-context@v1
       with:
-        creds: '${{ secrets.AZURE_CREDENTIALS }}'
+        creds: ${{ env.CREDENTIALS }}
         cluster-name: red-team-cluster
         resource-group: RedTeam
     - name: Checkout code
