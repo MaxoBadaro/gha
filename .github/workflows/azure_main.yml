@@ -10,11 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Azure Login
-      uses: azure/login@v1.4.6
+      uses: Azure/login@v1
       with:
-        client-id: 2f5b6309-db5c-438a-8a2d-9c142cc2482f
-        tenant-id: 7225c96d-8464-4716-a784-00aa2c59245d
-        subscription-id: b1f14ce2-41fb-4c12-8f8e-5763efbe21ad
+        creds: '{"clientId":"${{ secrets.CLIENT_ID }}","clientSecret":"${{ secrets.CLIENT_SECRET }}","subscriptionId":"${{ secrets.SUBSCRIPTION_ID }}","tenantId":"${{ secrets.TENANT_ID }}"}'
     - uses: Azure/aks-set-context@v1
       with:
         creds: '${{ secrets.AZURE_CREDENTIALS }}'
