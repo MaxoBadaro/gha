@@ -14,7 +14,7 @@ spec:
         app: test
     spec:
       containers:
-      - image: ${{ secrets.DOCKER_HUB_USERNAME }}/test:latest
+      - image: ${{ secrets.DOCKER_HUB_USERNAME }}/test
         name: test
         imagePullPolicy: Always
         ports:
