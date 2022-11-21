@@ -24,4 +24,4 @@ jobs:
       with:
         namespace: matrix-app-namespace
         manifests: |
-          manifests/deployment.yaml
+          manifests/deployment.yml
